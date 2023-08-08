@@ -1,0 +1,24 @@
+
+{% extends 'scheme.html' %}
+{% block title %}Success{% endblock %}
+{% load static %}
+{% block content %}
+<div class='container'>
+  <div class="hero-img-2">
+    <div class='hero-box-2'>
+      <h1 class="object hero-h1 fade-in" data-value='2'> 
+        Thanks for contacting me
+      </h1>
+      <p class='object p-p slide-left' id='slide-in' data-value='2'>  
+        You should receive a reply soon! 
+      </p> 
+      <p class='object p-p slide-left' id='slide-in' data-value='2'>  
+        Please use the Home button to return to the home page.
+      </p> 
+      <img class="img-fluid object slide-right" id='slide-in' data-value='-6' src="https://imagedelivery.net/4_y5kVkw2ENjgzV454LjcQ/1fd56ed5-d83e-4618-66f8-b5218375d200/default">
+      <button data-value='-2' class='object btn-cust btn-cust-color' onclick="window.location.href='{% url 'index' %}'"> Home </button>
+    </div>
+  </div>
+</div>
+<script src="{% static '/js/float_in.js' %}"></script>
+{% endblock %}

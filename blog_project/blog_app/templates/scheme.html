@@ -1,0 +1,141 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel='stylesheet' href="{% static 'css/main_style.css' %}">
+    
+
+    <title>    
+        {% block title %}
+          Silk Threads
+        {% endblock %}
+    </title>
+</head>
+<body class='body-main'>
+    <!------------------------------------------------>
+    <!-- nave bar -->
+    <!------------------------------------------------>
+<div class="container">
+  <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark">
+
+      <a class="navbar-brand" href="https://silkthreaddev.com/" target="_blank">Silk Thread Dev</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blogs' %}">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://silkthreaddev.com/" target="_blank">Projects</a>
+          </li>
+      {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Members Section</a>
+            <ul class="dropdown-menu">
+            {% for group in user.groups.all %}
+                {% if group.name == 'authors' %}
+              <li><a class="dropdown-item" href="{% url 'blog-create' %}">Create a Post</a></li>
+                {% else %}
+                {% endif %}
+                {% endfor %}
+              <li><a class="dropdown-item" href="{% url 'edit-profile' %}">Edit Profile</a></li>
+              <div class="dropdown-divider"></div>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Members Portal</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+              <div class="dropdown-divider"></div>
+              <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+            </ul>
+          </li>
+      {% endif %}
+        </ul>
+      </div>
+  </nav>
+</div>
+    <!------------------------------------------------>
+    <!-- dynamic content block -->
+    <!------------------------------------------------>
+
+    <div class='container-fluid'>
+    {% block content %}
+
+    {% endblock %}
+    </div>
+<br/>
+    <!------------------------------------------------>
+    <!-- dynamic content block -->
+    <!------------------------------------------------>
+<div class="container-fluid bg-dark">
+  <footer class="py-5">
+    <div class="row">
+      <div class="col-6 col-md-2 mb-3">
+        <h3 class='h3-3'>Silk Thread Dev</h3>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="https://silkthreaddev.com/" target="_blank" class="nav-link p-0 p-p text-body-secondary">Services</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'contact' %}" class="nav-link p-0 p-p text-body-secondary">Contact</a></li>
+          <li class="nav-item mb-2"><a href="https://silkthreaddev.com/" target="_blank" class="nav-link p-0 p-p text-body-secondary">Portfolio</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'about' %}" class="nav-link p-0 p-p text-body-secondary">About</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <h3 class='h3-3 text-center'>Follow Me</h3>
+        <div class="nav">
+        <ul>
+          <a  href='https://github.com/JoshHill90' target='bank'> <i class="fa-brands fa-github fa-2xl fa-space" style="color: #6be1ff;"></i></a>
+          <a  href='https://www.linkedin.com/in/joshua-hill-a45900238' target='bank'> <i class="fa-brands fa-linkedin fa-2xl fa-space" style="color: #6be1ff;"></i></a>
+        </ul>
+        </div>
+      </div>
+
+      <div class="col-md-5 offset-md-3 mb-3 form-group">
+        <form autocomplete="off" method="POST" action="{% url 'index' %}">
+          <h3 class='h3-3'>Subscribe</h3>
+          <p class='p-p'>Get email notfications when a new blog post</p>
+          <div class=" flex-column flex-sm-row w-100 mb-2 gap-2">
+            {% csrf_token %}
+            {{ email_list_form.email.label_tag }}
+            {{ email_list_form.email }}
+          </div>
+          <button type="submit" class="btn btn-cust btn-cust-color">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <hr class='p-p'>
+    <div class="row">
+      <p class='p-p text-center'>This site was created and is maintained by Silk Thread Dev</p>
+      <a class='footer-link p-p text-center' href='https://silkthreaddev.com'>Silk Thread Dev</a>
+      <p class='p-p text-center'>© 2022 Silk Thread Dev, Inc. All rights reserved. All data collected is kept private and safe</p>
+      <p class='p-p text-center'></p>
+    </div>
+    
+  </footer>
+</div>
+<script src="https://kit.fontawesome.com/00f4d71521.js" crossorigin="anonymous"></script>
+</body>
+</html>
