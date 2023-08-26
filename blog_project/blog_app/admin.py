@@ -1,10 +1,11 @@
 from django.contrib import admin
-from.models import Blog, Category, MetaTags, Comments, Contact
+from.models import Blog, Category, MetaTags, Comments, Contact, EmailList
  
 admin.site.register(Blog)
 admin.site.register(Category)
 admin.site.register(MetaTags)
 admin.site.register(Contact)
+admin.site.register(EmailList)
 @admin.register(Comments)
 
 

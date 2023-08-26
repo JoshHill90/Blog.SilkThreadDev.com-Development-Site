@@ -7,7 +7,7 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from django import forms
 from django.contrib import messages
-from .models import Blog, Category, MetaTags, Contact, Comments
+from .models import Blog, Category, MetaTags, Contact, Comments, EmailList
 from .forms import BlogForm, ContactForm, CommentForm, EmailListForm
 from blog_project.env.MailerDJ import AutoReply
 
@@ -128,11 +128,13 @@ class IndexView(ListView, FormView):
     template_name = 'index.html'
     ordering =['-id']
     form_class = EmailListForm
+    email__sub = EmailList.objects.all()
     success_url = reverse_lazy('email-success')
 
     def form_valid(self, form):
-        self.object = form.save()
-        email = self.object.email
+
+        email__sub = form.save()
+        email = email__sub.email
         EMAIL.mailing_list(email)
 
         return super().form_valid(form)

@@ -116,7 +116,7 @@
       <div class="col-md-5 offset-md-3 mb-3 form-group">
         <form autocomplete="off" method="POST" action="{% url 'index' %}">
           <h3 class='h3-3'>Subscribe</h3>
-          <p class='p-p'>Get email notfications when a new blog post</p>
+          <p class='p-p'>Receive email notifications when I posts a new blog</p>
           <div class=" flex-column flex-sm-row w-100 mb-2 gap-2">
             {% csrf_token %}
             {{ email_list_form.email.label_tag }}
@@ -128,9 +128,9 @@
     </div>
     <hr class='p-p'>
     <div class="row">
-      <p class='p-p text-center'>This site was created and is maintained by Silk Thread Dev</p>
-      <a class='footer-link p-p text-center' href='https://silkthreaddev.com'>Silk Thread Dev</a>
-      <p class='p-p text-center'>© 2022 Silk Thread Dev, Inc. All rights reserved. All data collected is kept private and safe</p>
+      <p class='p-p text-center'>Created and maintained by <a class='footer-link p-p' href='https://silkthreaddev.com'>Silk Thread Dev</a></p>
+      
+      <p class='p-p text-center'>© 2022 <a class='footer-link p-p' href='https://silkthreaddev.com'>Silk Thread Dev</a>, Inc. All rights reserved. All data collected is kept private and safe</p>
       <p class='p-p text-center'></p>
     </div>
     
